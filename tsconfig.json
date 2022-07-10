@@ -7,30 +7,20 @@
       ],
       "__tests__/*": [
         "__tests__/*"
-      ],
-      "@helpers/*": [
-        "../__tests__/helpers/*"
       ]
     },
-    "rootDirs": [
-      "src",
-      "__tests__/helpers"
-    ],
-    "typeRoots": [
-      "src/types",
-      "node_modules/@types"
-    ],
     "plugins": [
       {
         "transform": "@zerollup/ts-transform-paths"
       }
     ],
-    "target": "es5",
+    "target": "es2020",
     "module": "commonjs",
     "lib": [
-      "es2017",
+      "es2020",
       "dom"
     ],
+    "skipLibCheck": true,
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
@@ -41,13 +31,14 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }

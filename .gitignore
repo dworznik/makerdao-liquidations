@@ -33,3 +33,14 @@ node_modules/
 .serverless/
 .vscode-test
 .husky/
+
+# Editor / OS cruft
+.DS_Store
+.history/
+.vscode/
+
+# Generated analysis output (CSV dumps) — not committed
+output/
+
+# Local scratch
+active.json

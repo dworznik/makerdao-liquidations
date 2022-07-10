@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
     es6: true,
     jest: true,
   },
@@ -11,7 +11,6 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
   globals: {
     Atomics: 'readonly',
@@ -26,52 +25,75 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'prettier',
-    '@typescript-eslint',
-  ],
+  plugins: ['prettier', '@typescript-eslint'],
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
-      }
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
     },
   },
   rules: {
-    'prettier/prettier': [0,
+    'prettier/prettier': [
+      0,
       {
-        'semi': true,
-        'singleQuote': true,
-        'trailingComma': 'es5',
-        'printWidth': 100,
-        'tabWidth': 2,
-        'arrowParens': 'avoid',
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'es5',
+        printWidth: 100,
+        tabWidth: 2,
+        arrowParens: 'avoid',
       },
     ],
-    'semi': 0,
-    'eqeqeq': [1, 'always'],
-    'quotes': [1, 'single'],
+    semi: 0,
+    eqeqeq: [1, 'always'],
+    quotes: [1, 'single'],
     'no-undef': 0,
-    'no-console': 2,
-    'no-unused-vars': 0,
-    'no-mixed-operators': [1,
+    // fp-ts tags its Either/Option unions with a leading-underscore `_tag`.
+    'no-underscore-dangle': ['error', { allow: ['_tag'] }],
+    // These are CLI analysis scripts; stdout is the data channel and stderr
+    // carries progress, so console usage is intentional throughout.
+    'no-console': 0,
+    // Block ranges and per-event RPC lookups are processed sequentially on
+    // purpose, to stay within provider rate limits — awaiting in a loop is
+    // the intended behavior here, and `for...of` reads clearest for it.
+    'no-await-in-loop': 0,
+    'no-restricted-syntax': [
+      'error',
       {
-        'allowSamePrecedence': true,
+        selector: 'ForInStatement',
+        message:
+          'for..in loops iterate over the entire prototype chain. Use Object.{keys,values,entries} and iterate over the resulting array.',
+      },
+      {
+        selector: 'LabeledStatement',
+        message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain.',
+      },
+      {
+        selector: 'WithStatement',
+        message: '`with` is disallowed in strict mode because it makes code impossible to predict.',
+      },
+    ],
+    'no-unused-vars': 0,
+    'no-mixed-operators': [
+      1,
+      {
+        allowSamePrecedence: true,
       },
     ],
     'eol-last': [2, 'always'],
     'no-confusing-arrow': 0,
     'arrow-parens': [2, 'as-needed'],
-    'arrow-spacing': ['error', { 'before': true, 'after': true }],
+    'arrow-spacing': ['error', { before: true, after: true }],
     'arrow-body-style': [2, 'as-needed'],
     'no-extra-parens': [
       'warn',
       'all',
       {
-        'conditionalAssign': false,
-        'nestedBinaryExpressions': false,
-        'ignoreJSX': 'none',
-        'enforceForArrowConditionals': false,
+        conditionalAssign: false,
+        nestedBinaryExpressions: false,
+        ignoreJSX: 'none',
+        enforceForArrowConditionals: false,
       },
     ],
     'no-param-reassign': 0,
@@ -95,11 +117,11 @@ module.exports = {
       'error',
       'ignorePackages',
       {
-        'ts': 'never',
-        'tsx': 'never',
-        'js': 'never',
-        'jsx': 'never'
-      }
+        ts: 'never',
+        tsx: 'never',
+        js: 'never',
+        jsx: 'never',
+      },
     ],
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/camelcase': 0,
