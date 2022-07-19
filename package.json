@@ -1,5 +1,5 @@
 {
-  "name": "makerdao-liquidation-analysis",
+  "name": "makerdao-liquidations",
   "private": true,
   "version": "1.0.0",
   "description": "On-chain analysis of MakerDAO liquidations (Bite/Bark correlated with their collateral-auction Kicks) and Vat accounting (fold/frob), written in TypeScript with ethers and io-ts.",
